@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        html,
+        body {
+            width: 50%;
+            margin: 0 auto;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            width: 360px;
+        }
+
+        #inputField {
+            width: 300px;
+            height: 46px;
+            border-width: 0;
+            border: 1px solid black;
+            outline: none;
+            font-size: 25px;
+            vertical-align: middle;
+        }
+
+        #addToDo {
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+            vertical-align: middle;
+            font-size: 30px;
+        }
+
+        .paragraph-styling {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .to-dos {
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>To Do List</h1>
+    <div class="container">
+        <input id="inputField" type="text" placeholder="Enter a new task">
+        <button id="addToDo">+</button>
+        <div class="to-dos" id="toDoContainer">
+        </div>
+    </div>
+    <script>
+        let addToDoButton = document.getElementById('addToDo');
+        let toDoContainer = document.getElementById('toDoContainer');
+        let inputField = document.getElementById('inputField');
+
+        addToDoButton.addEventListener('click', function () {
+            let taskContainer = document.createElement('div');
+            let checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+
+            let taskText = document.createElement('span');
+            taskText.classList.add('paragraph-styling');
+            taskText.innerText = inputField.value;
+
+            let deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.style.marginLeft = '10px';
+
+
+            checkbox.addEventListener('change', function () {
+                if (checkbox.checked) {
+                    taskText.style.textDecoration = "line-through"; 
+                } else {
+                    taskText.style.textDecoration = "none";
+                }
+            });
+
+            deleteButton.addEventListener('click', function () {
+                toDoContainer.removeChild(taskContainer);
+            });
+
+            taskContainer.appendChild(checkbox);
+            taskContainer.appendChild(taskText);
+            taskContainer.appendChild(deleteButton);
+            toDoContainer.appendChild(taskContainer); 
+            inputField.value = ""; 
+        });
+
+    </script>
+</body>
+
+</html>
